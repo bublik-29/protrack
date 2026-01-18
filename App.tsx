@@ -5,11 +5,11 @@ import { Activity, ChevronLeft, Settings as SettingsIcon } from 'lucide-react';
 import { AppView, WorkoutSession, WorkoutBlock, ExerciseData, Theme, Language } from './types';
 import { STORAGE_KEY } from './constants';
 import { translations } from './translations';
-import WorkoutCalendar from './components/WorkoutCalendar';
-import WorkoutSetup from './components/WorkoutSetup';
-import CountdownOverlay from './components/CountdownOverlay';
-import ActiveWorkout from './components/ActiveWorkout';
-import Settings from './components/Settings';
+import WorkoutCalendar from './WorkoutCalendar';
+import WorkoutSetup from './WorkoutSetup';
+import CountdownOverlay from './CountdownOverlay';
+import ActiveWorkout from './ActiveWorkout';
+import Settings from './Settings';
 
 const App: React.FC = () => {
   const [view, setView] = useState<AppView>('CALENDAR');
