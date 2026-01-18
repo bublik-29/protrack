@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import { translations } from '../translations';
-import { Language } from '../types';
+import { translations } from './translations';
+import { Language } from './types';
 
 interface Props {
   onFinished: () => void;
