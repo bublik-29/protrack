@@ -1,10 +1,10 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { ShieldCheck, Dumbbell, AlertTriangle } from 'lucide-react';
-import { WorkoutBlock, ExerciseData, WorkoutSession, Theme, Language } from '../types';
-import { FINISH_HOLD_TIME } from '../constants';
-import { translations } from '../translations';
+import { WorkoutBlock, ExerciseData, WorkoutSession, Theme, Language } from './types';
+import { FINISH_HOLD_TIME } from './constants';
+import { translations } from './translations';
 
 interface Props {
   block: WorkoutBlock;
