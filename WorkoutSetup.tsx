@@ -3,10 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { format, isSameDay, parseISO } from 'date-fns';
 import { enUS, es, fr, ru, pl } from 'date-fns/locale';
 import { Play, Dumbbell, History, Sparkles, Trash2, ShieldAlert } from 'lucide-react';
-import { WorkoutBlock, WorkoutSession, ExerciseData, SetRecord, Theme, Language } from '../types';
-import { WORKOUT_BLOCKS, FINISH_HOLD_TIME } from '../constants';
-import { translations } from '../translations';
-import { getWorkoutTip } from '../services/geminiService';
+import { WorkoutBlock, WorkoutSession, ExerciseData, SetRecord, Theme, Language } from './types';
+import { WORKOUT_BLOCKS, FINISH_HOLD_TIME } from './constants';
+import { translations } from './translations';
+import { getWorkoutTip } from './geminiService';
 
 interface Props {
   date: Date;
@@ -22,7 +22,6 @@ const WorkoutSetup: React.FC<Props> = ({ date, history, onStart, onDelete, theme
   const isDark = theme === 'dark';
   const locales = { en: enUS, es: es, fr: fr, ru: ru, pl: pl };
 
-  // Check if session already exists for this day
   const existingSession = history.find(h => isSameDay(parseISO(h.date), date));
   
   const initialBlock = existingSession 
@@ -45,7 +44,6 @@ const WorkoutSetup: React.FC<Props> = ({ date, history, onStart, onDelete, theme
     setAiTip(t.loadingTip);
     const prev = history.find(h => h.blockId === selectedBlock.id);
     
-    // Fetch tip in selected language
     const translatedBlockName = t[selectedBlock.name as keyof typeof t] || selectedBlock.name;
     const translatedExercises = selectedBlock.exercises.map(exKey => t[exKey as keyof typeof t] || exKey);
     
@@ -64,7 +62,6 @@ const WorkoutSetup: React.FC<Props> = ({ date, history, onStart, onDelete, theme
     setExercises(initialExercises);
   }, [selectedBlock, history, language, existingSession]);
 
-  // Delete hold progress logic
   useEffect(() => {
     let animationFrame: number;
     const checkDelete = () => {
@@ -88,7 +85,7 @@ const WorkoutSetup: React.FC<Props> = ({ date, history, onStart, onDelete, theme
   }, [deleteHoldStart, existingSession]);
 
   const updateSet = (exerciseIndex: number, setIndex: number, field: keyof SetRecord, value: number) => {
-    if (existingSession) return; // Prevent updates if session exists
+    if (existingSession) return;
     const updated = [...exercises];
     updated[exerciseIndex].sets[setIndex][field] = value;
     setExercises(updated);
