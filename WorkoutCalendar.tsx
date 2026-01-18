@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, addDays, isToday, startOfWeek, endOfWeek, isSameMonth, subMonths, addMonths, parseISO, isAfter, startOfDay } from 'date-fns';
 import { enUS, es, fr, ru, pl } from 'date-fns/locale';
 import { ChevronLeft, ChevronRight, CheckCircle2, Moon, Calendar as CalendarIcon } from 'lucide-react';
-import { WorkoutSession, Theme, Language } from '../types';
-import { translations } from '../translations';
+import { WorkoutSession, Theme, Language } from './types';
+import { translations } from './translations';
 
 interface Props {
   history: WorkoutSession[];
@@ -24,7 +24,6 @@ const WorkoutCalendar: React.FC<Props> = ({ history, onDayClick, theme, language
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(currentMonth);
   
-  // date-fns automatically uses the locale's first day of the week (Monday for RU/PL)
   const calendarStart = startOfWeek(monthStart, { locale: currentLocale });
   const calendarEnd = endOfWeek(monthEnd, { locale: currentLocale });
 
@@ -33,7 +32,6 @@ const WorkoutCalendar: React.FC<Props> = ({ history, onDayClick, theme, language
     end: calendarEnd,
   });
 
-  // Generate localized day headers starting from the locale's first day of the week
   const weekDays = [];
   const startOfViewWeek = startOfWeek(new Date(), { locale: currentLocale });
   for (let i = 0; i < 7; i++) {
@@ -49,7 +47,6 @@ const WorkoutCalendar: React.FC<Props> = ({ history, onDayClick, theme, language
   };
 
   const handleGoToToday = () => {
-    // Only navigate the month view, don't trigger the day click action
     setCurrentMonth(new Date());
   };
 
